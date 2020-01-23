@@ -1,8 +1,8 @@
 package servlets;
 
 import accounts.AccountService;
-import accounts.UserProfile;
 import dbService.DBException;
+import dbService.dataSets.UsersDataSet;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -21,7 +21,7 @@ public class SignUpServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String login = request.getParameter("login");
         String pass = request.getParameter("password");
-        UserProfile profile = new UserProfile(login,pass,login);
+        UsersDataSet profile = new UsersDataSet(login,pass,login);
         try {
             accountService.addNewUser(profile);
         } catch (DBException e) {

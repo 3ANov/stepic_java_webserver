@@ -16,7 +16,7 @@ import java.util.Map;
  */
 public class AccountService {
     DBService loginToProfileDbService;
-    private final Map<String, UserProfile> sessionIdToProfile;
+    private final Map<String, UsersDataSet> sessionIdToProfile;
 
 
 
@@ -26,20 +26,20 @@ public class AccountService {
         sessionIdToProfile = new HashMap<>();
     }
 
-    public void addNewUser(UserProfile userProfile) throws DBException {
-        loginToProfileDbService.addUser(userProfile.getLogin(), userProfile.getPass(),userProfile.getEmail());
+    public void addNewUser(UsersDataSet usersDataSet) throws DBException {
+        loginToProfileDbService.addUser(usersDataSet.getLogin(), usersDataSet.getPass(),usersDataSet.getEmail());
     }
 
-    public UserProfile getUserByLogin(String login) throws DBException {
-        return  loginToProfileDbService.getUser(login).toUserProfile();
+    public UsersDataSet getUserByLogin(String login) throws DBException {
+        return  loginToProfileDbService.getUser(login);
     }
 
-    public UserProfile getUserBySessionId(String sessionId) {
+    public UsersDataSet getUserBySessionId(String sessionId) {
         return sessionIdToProfile.get(sessionId);
     }
 
-    public void addSession(String sessionId, UserProfile userProfile) {
-        sessionIdToProfile.put(sessionId, userProfile);
+    public void addSession(String sessionId, UsersDataSet usersDataSet) {
+        sessionIdToProfile.put(sessionId, usersDataSet);
     }
 
     public void deleteSession(String sessionId) {

@@ -1,7 +1,5 @@
 package dbService.dataSets;
 
-import accounts.UserProfile;
-
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -40,6 +38,12 @@ public class UsersDataSet implements Serializable { // Serializable Important to
     public UsersDataSet(long id, String login) {
         this.setId(id);
         this.setLogin(login);
+    }
+    public UsersDataSet(String login) {
+        this.setId(-1);
+        this.setLogin(login);
+        this.setPass(login);
+        this.setEmail(login);
     }
 
     public UsersDataSet(String login,String pass,String email) {
@@ -90,8 +94,6 @@ public class UsersDataSet implements Serializable { // Serializable Important to
                 '}';
     }
 
-    public UserProfile toUserProfile() {
-       return new UserProfile(this.login,this.pass,this.email);
-    }
+
 
 }

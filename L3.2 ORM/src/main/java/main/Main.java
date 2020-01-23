@@ -2,7 +2,6 @@ package main;
 
 
 import accounts.AccountService;
-import accounts.UserProfile;
 import dbService.DBException;
 import dbService.DBService;
 import dbService.dataSets.UsersDataSet;
@@ -31,8 +30,8 @@ public class Main {
 
             AccountService accountService = new AccountService();
 
-            accountService.addNewUser(new UserProfile("admin"));
-            accountService.addNewUser(new UserProfile("test"));
+            accountService.addNewUser(new UsersDataSet("admin"));
+            accountService.addNewUser(new UsersDataSet("test"));
 
             ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
             //context.addServlet(new ServletHolder(new UsersServlet(accountService)), "/api/v1/users");
