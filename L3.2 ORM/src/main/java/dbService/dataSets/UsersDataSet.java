@@ -1,5 +1,7 @@
 package dbService.dataSets;
 
+import accounts.UserProfile;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -20,8 +22,14 @@ public class UsersDataSet implements Serializable { // Serializable Important to
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "name", unique = true, updatable = false)
-    private String name;
+    @Column(name = "login", unique = true, updatable = false)
+    private String login;
+
+    @Column(name = "password", unique = false, updatable = false)
+    private String pass;
+
+    @Column(name = "email", unique = true, updatable = false)
+    private String email;
 
     //Important to Hibernate!
     @SuppressWarnings("UnusedDeclaration")
@@ -29,23 +37,33 @@ public class UsersDataSet implements Serializable { // Serializable Important to
     }
 
     @SuppressWarnings("UnusedDeclaration")
-    public UsersDataSet(long id, String name) {
+    public UsersDataSet(long id, String login) {
         this.setId(id);
-        this.setName(name);
+        this.setLogin(login);
     }
 
-    public UsersDataSet(String name) {
+    public UsersDataSet(String login,String pass,String email) {
         this.setId(-1);
-        this.setName(name);
+        this.setLogin(login);
+        this.setPass(pass);
+        this.setEmail(email);
     }
 
-    @SuppressWarnings("UnusedDeclaration")
-    public String getName() {
-        return name;
+
+    public String getPass() {
+        return pass;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getEmail() {
+        return email;
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public long getId() {
@@ -56,11 +74,24 @@ public class UsersDataSet implements Serializable { // Serializable Important to
         this.id = id;
     }
 
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
     @Override
     public String toString() {
         return "UserDataSet{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", login='" + login + '\'' +
                 '}';
     }
+
+    public UserProfile toUserProfile() {
+       return new UserProfile(this.login,this.pass,this.email);
+    }
+
 }
