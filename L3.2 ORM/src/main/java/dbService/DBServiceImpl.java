@@ -70,7 +70,7 @@ public class DBServiceImpl implements DBService {
         configuration.setProperty("hibernate.connection.driver_class", "org.postgresql.Driver");
         configuration.setProperty("hibernate.connection.url", "jdbc:postgresql://127.0.0.1:5432/db_jetty");
         configuration.setProperty("hibernate.connection.username", "testuser");
-        configuration.setProperty("hibernate.connection.password", "gfhjkmjb");
+        configuration.setProperty("hibernate.connection.password", "testuser");
         configuration.setProperty("hibernate.show_sql", hibernate_show_sql);
         configuration.setProperty("hibernate.hbm2ddl.auto", hibernate_hbm2ddl_auto);
         return configuration;
