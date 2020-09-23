@@ -12,11 +12,13 @@ import java.io.IOException;
 
 public class ResourceServlet extends HttpServlet {
     static final Logger logger = LogManager.getLogger(ResourceServlet.class.getName());
-    public static final String PAGE_URL = "/resource";
+    public static final String PAGE_URL = "/resources";
 
     public ResourceServerI resourceServer;
 
-
+    public ResourceServlet(ResourceServerI resourceServer) {
+        this.resourceServer = resourceServer;
+    }
 
     @Override
     protected void doPost(HttpServletRequest request,

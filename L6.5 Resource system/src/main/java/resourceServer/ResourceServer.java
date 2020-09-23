@@ -11,7 +11,6 @@ public class ResourceServer implements ResourceServerI {
     static final Logger logger = LogManager.getLogger(ResourceServer.class.getName());
     Resource resource;
 
-
     @Override
     public void addNewResource(String path) {
         logger.info("Add new resource");

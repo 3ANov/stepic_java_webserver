@@ -30,16 +30,17 @@ public class Main {
     static final Logger logger = LogManager.getLogger(Main.class.getName());
 
     public static void main(String[] args) throws Exception {
-        ResourceServlet resourceServlet = new ResourceServlet();
+
 
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
 
         ResourceServerI resourceServer = new ResourceServer();
         ResourceServerControllerMBean serverStatistics = new ResourceServerController(resourceServer);
         MBeanServer mbs = ManagementFactory.getPlatformMBeanServer();
-        ObjectName name = new ObjectName("ServerManager:type=AccountServerController");
+        ObjectName name = new ObjectName("Admin:type=ResourceServerController");
         mbs.registerMBean(serverStatistics, name);
 
+        ResourceServlet resourceServlet = new ResourceServlet(resourceServer);
         context.addServlet(new ServletHolder(resourceServlet), resourceServlet.PAGE_URL);
 
         Server server = new Server(8080);
