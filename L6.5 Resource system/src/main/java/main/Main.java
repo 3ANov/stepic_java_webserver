@@ -40,13 +40,15 @@ public class Main {
         ObjectName name = new ObjectName("ServerManager:type=AccountServerController");
         mbs.registerMBean(serverStatistics, name);
 
-        context.addServlet(new ServletHolder(resourceServlet), "/mirror");
+        context.addServlet(new ServletHolder(resourceServlet), resourceServlet.PAGE_URL);
 
         Server server = new Server(8080);
         server.setHandler(context);
 
 
         server.start();
+        logger.info("Server started");
         server.join();
+
     }
 }
