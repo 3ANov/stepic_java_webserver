@@ -1,6 +1,6 @@
 package resources;
 
-public class TestResource {
+public class TestResource implements Resource{
     private String name;
     private int age;
 
@@ -16,5 +16,9 @@ public class TestResource {
 
     public String getName() {
         return name;
+    }
+
+    public int getAge() {
+        return age;
     }
 }

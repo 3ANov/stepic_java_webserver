@@ -8,9 +8,15 @@ import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 
 
+import resourceServer.ResourceServer;
+import resourceServer.ResourceServerController;
+import resourceServer.ResourceServerControllerMBean;
+import resourceServer.ResourceServerI;
 import servlets.ResourceServlet;
 
-
+import javax.management.MBeanServer;
+import javax.management.ObjectName;
+import java.lang.management.ManagementFactory;
 
 
 /**
@@ -27,6 +33,12 @@ public class Main {
         ResourceServlet resourceServlet = new ResourceServlet();
 
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
+
+        ResourceServerI resourceServer = new ResourceServer();
+        ResourceServerControllerMBean serverStatistics = new ResourceServerController(resourceServer);
+        MBeanServer mbs = ManagementFactory.getPlatformMBeanServer();
+        ObjectName name = new ObjectName("ServerManager:type=AccountServerController");
+        mbs.registerMBean(serverStatistics, name);
 
         context.addServlet(new ServletHolder(resourceServlet), "/mirror");
 
